@@ -8,7 +8,7 @@ def speak(s):
 def conditions(s):
     site = ["Youtube", "Github"]
     link = ["https://www.youtube.com", "https://github.com/LEGION-0-1"]
-    if(f'Open {site}' or f'Search {site}'):
+    if(f'Open {site}' or "Search"):
         if (s == f'Open {site[0]}'.lower()):
             speak(f"Opening {site[0]}")
             webbrowser.open(f"{link[0]}")
@@ -16,13 +16,15 @@ def conditions(s):
             speak(f"Opening {site[1]}")
             webbrowser.open(f"{link[1]}")
         elif (s == 'Search'.lower()):
-            print("What should I search?")
+            b = "What Should I Search?"
+            print(b)
+            speak(b)
             a = input()
+            speak(f"Searching {a}")
             webbrowser.open(f"https://www.google.com/search?q={a}")
-    else:
-        speak(s)
 
 while 1:
     print("What do you want me to speak")
     s = input()
+    speak(s)
     conditions(s)
