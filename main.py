@@ -14,7 +14,7 @@ def conditions(s):
             print(f"Opening {site[a]}...")
             speak(f"Opening {site[a]}")
             webbrowser.open(f"{link[a]}")
-        elif (s == f'open Github'):
+        elif (s == f'open github'):
             a = 1
             print(f"Opening {site[a]}...")
             speak(f"Opening {site[a]}")
