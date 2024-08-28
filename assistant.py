@@ -11,6 +11,11 @@ def open_website(site_name, url):
     speak(f"Opening {site_name}")
     webbrowser.open(url)
 
+def open_app(app_name, path):
+    print(f"Opening {app_name}...")
+    speak(f"Opening {app_name}")
+    subprocess.Popen(path)
+
 def search_google(query):
     search_url = f"https://www.google.com/search?q={query}"
     print(f"Searching Google for {query}...")
@@ -21,12 +26,12 @@ def conditions(command):
     site_links = {
         "youtube": "https://www.youtube.com",
         "yt": "https://www.youtube.com",
-        "github": "https://github.com/LEGION-0-1",
+        "github": "https://github.com/",
         "chatgpt": "https://chatgpt.com/",
         "gpt": "https://chatgpt.com/",
     }
     app_path = {
-        "calc": 'C:\\Windows\\System32\\calc.exe',
+        "calculator": 'C:\\Windows\\System32\\calc.exe',
         "notepad": 'C:\\Windows\\System32\\notepad.exe',
         "wordpad": 'C:\\Windows\\System32\\write.exe'
     }
@@ -61,7 +66,7 @@ def conditions(command):
     elif command.startswith("launch"):
         for app, path in app_path.items():
             if app in command:
-                subprocess.Popen(path)
+                open_app(app.capitalize(), path)
                 return
         speak("Sorry, I don't recognize that app.")
         print("Sorry, I don't recognize that app.")
