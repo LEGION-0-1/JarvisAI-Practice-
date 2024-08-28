@@ -11,6 +11,7 @@ The script uses the `win32com.client` library for voice output and the `webbrows
 - **Voice Output**: Uses the `win32com.client` library to provide auditory feedback.
 - **Website Access**: Opens popular websites like YouTube, GitHub, and ChatGPT based on voice commands.
 - **Search Functionality**: Performs searches on Google, YouTube, and GitHub based on user input.
+- **Application Access**: Opens System applications such as Calculator, Notepad, Wordpad.
 
 ## Requirements
 
@@ -49,17 +50,32 @@ Once the script is running, it will prompt you with "How may I assist you?" You 
   - "Search Python tutorials"
   - "Search Python tutorials on YouTube"
   - "Search Python projects on GitHub"
+ 
+- **Open an application**:
+  - "Launch Calculator"
+  - "Launch Notepad"
+  - "Launch Wordpad"
 
-The assistant will open the corresponding website or perform the search in your default web browser.
+The assistant will open the corresponding website or application or perform the search in your default web browser.
 
-## Adding More Commands
+## Adding More Website Commands
 
-To extend the functionality and add more commands or websites:
+To extend the functionality and add more commands to open websites:
 
 1. **Open the `assistant.py` file.**
 2. **Locate the `site_links` dictionary** within the `conditions` function.
 3. **Add a new entry** in the format `"site_name": "site_url"`.
 4. **Handle the new command** by adding logic within the `if command.startswith("open"):` block.
+
+## Adding More Application Commands
+
+To extend the functionality and add more commands to open websites:
+
+1. **Open the `assistant.py` file.**
+2. **Locate the `app_path` dictionary** within the `conditions` function.
+3. **Add a new entry** in the format `"app_name": "app_path"`.
+4. **Handle the new command** by adding logic within the `if command.startswith("launch"):` block.
+
 
 ## Contributing
 
