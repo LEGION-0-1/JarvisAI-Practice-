@@ -1,39 +1,63 @@
 import win32com.client
 import webbrowser
 
-def speak(s):
+def speak(text):
     speaker = win32com.client.Dispatch("SAPI.SpVoice")
-    speaker.Speak(s)
+    speaker.Speak(text)
 
-def conditions(s):
-    site = ["Youtube", "Github", "ChatGPT"]
-    link = ["https://www.youtube.com", "https://github.com/LEGION-0-1", "https://chatgpt.com/"]
-    if(f'Open {site}' or "Search"):
-        if (s == f'open youtube' or s == f'open yt'):
-            a = 0
-            print(f"Opening {site[a]}...")
-            speak(f"Opening {site[a]}")
-            webbrowser.open(f"{link[a]}")
-        elif (s == f'open github'):
-            a = 1
-            print(f"Opening {site[a]}...")
-            speak(f"Opening {site[a]}")
-            webbrowser.open(f"{link[a]}")
-        elif (s == f'open chatgpt' or s == f'open gpt'):
-            a = 2
-            print(f"Opening {site[a]}...")
-            speak(f"Opening {site[a]}")
-            webbrowser.open(f"{link[a]}")
-        elif (s == 'search'):
-            b = "What Should I Search?"
-            print(b)
-            speak(b)
-            a = input()
-            speak(f"Searching {a}")
-            webbrowser.open(f"https://www.google.com/search?q={a}")
+def open_website(site_name, url):
+    print(f"Opening {site_name}...")
+    speak(f"Opening {site_name}")
+    webbrowser.open(url)
 
-while 1:
-    print("How may i assist you?")
-    s = input()
-    speak(s)
-    conditions(s.lower())
+def search_google(query):
+    search_url = f"https://www.google.com/search?q={query}"
+    print(f"Searching Google for {query}...")
+    speak(f"Searching Google for {query}")
+    webbrowser.open(search_url)
+
+def conditions(command):
+    site_links = {
+        "youtube": "https://www.youtube.com",
+        "yt": "https://www.youtube.com",
+        "github": "https://github.com/LEGION-0-1",
+        "chatgpt": "https://chatgpt.com/",
+        "gpt": "https://chatgpt.com/",
+    }
+
+    command = command.lower()
+    
+    if command.startswith("open"):
+        for site, link in site_links.items():
+            if site in command:
+                open_website(site.capitalize(), link)
+                return
+        speak("Sorry, I don't recognize that site.")
+        print("Sorry, I don't recognize that site.")
+    
+    elif "search" in command:
+        search_platform = "google"
+        query = command.replace("search", "").strip()
+        
+        if "on youtube" in command:
+            search_platform = "youtube"
+            query = query.replace("on youtube", "").strip()
+            search_url = f"https://www.youtube.com/results?search_query={query}"
+        elif "on github" in command:
+            search_platform = "github"
+            query = query.replace("on github", "").strip()
+            search_url = f"https://github.com/search?q={query}"
+        else:
+            search_url = f"https://www.google.com/search?q={query}"
+
+        print(f"Searching {search_platform.capitalize()} for {query}...")
+        speak(f"Searching {search_platform.capitalize()} for {query}")
+        webbrowser.open(search_url)
+    else:
+        speak("Sorry, I didn't understand the command.")
+        print("Sorry, I didn't understand the command.")
+
+while True:
+    print("How may I assist you?")
+    user_input = input()
+    conditions(user_input)
