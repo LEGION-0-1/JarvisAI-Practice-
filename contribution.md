@@ -1,5 +1,3 @@
-
-```markdown
 # Contribution Guide
 
 Thank you for considering contributing to the Python Assistant Script project! We appreciate your help in improving this project.
@@ -61,13 +59,6 @@ Go to the original repository on GitHub and submit a pull request from your bran
 
 If you encounter any bugs or issues while using the project, please open an issue on the [GitHub Issues](https://github.com/LEGION-0-1/Python-Assistant-Script/issues) page. Provide as much detail as possible, including steps to reproduce the issue.
 
-## Suggestions and Feedback
-
-We welcome your suggestions! If you have any ideas for new features or improvements, feel free to open an issue or a pull request.
-
 ## License
 
 By contributing to this project, you agree that your contributions will be licensed under the MIT License.
-```
-
-These files are formatted for use in a GitHub repository, providing clear guidance on usage, contribution, and other key aspects of the project.

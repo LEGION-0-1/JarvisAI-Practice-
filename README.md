@@ -1,9 +1,10 @@
-```markdown
 # Python Assistant Script
 
 ## Overview
 
-This project is a Python-based voice assistant script designed to automate certain tasks on your computer, such as opening websites and performing searches on Google, YouTube, and GitHub. The script uses the `win32com.client` library for voice output and the `webbrowser` module to open URLs.
+This project is a Python-based voice assistant script designed to automate certain tasks on your computer,
+such as opening websites and performing searches on Google, YouTube, and GitHub.
+The script uses the `win32com.client` library for voice output and the `webbrowser` module to open URLs.
 
 ## Features
 
@@ -71,6 +72,3 @@ If you encounter any bugs or have any suggestions for improvements, please open 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-```
-
----
