@@ -1,1 +1,1 @@
-# JarvisAI-Practice-
+# python-assistant-script-
