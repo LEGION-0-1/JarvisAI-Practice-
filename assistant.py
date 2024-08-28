@@ -1,5 +1,6 @@
 import win32com.client
 import webbrowser
+import subprocess
 
 def speak(text):
     speaker = win32com.client.Dispatch("SAPI.SpVoice")
@@ -24,7 +25,11 @@ def conditions(command):
         "chatgpt": "https://chatgpt.com/",
         "gpt": "https://chatgpt.com/",
     }
-
+    app_path = {
+        "calc": 'C:\\Windows\\System32\\calc.exe',
+        "notepad": 'C:\\Windows\\System32\\notepad.exe',
+        "wordpad": 'C:\\Windows\\System32\\write.exe'
+    }
     command = command.lower()
     
     if command.startswith("open"):
@@ -53,6 +58,14 @@ def conditions(command):
         print(f"Searching {search_platform.capitalize()} for {query}...")
         speak(f"Searching {search_platform.capitalize()} for {query}")
         webbrowser.open(search_url)
+    elif command.startswith("launch"):
+        for app, path in app_path.items():
+            if app in command:
+                subprocess.Popen(path)
+                return
+        speak("Sorry, I don't recognize that app.")
+        print("Sorry, I don't recognize that app.")
+
     else:
         speak("Sorry, I didn't understand the command.")
         print("Sorry, I didn't understand the command.")
