@@ -45,6 +45,7 @@ Once the script is running, it will prompt you with "How may I assist you?" You 
   - "Open YouTube" or "Open YT"
   - "Open GitHub"
   - "Open ChatGPT" or "Open GPT"
+  - "Open Spotify"
   
 - **Search for something**:
   - "Search Python tutorials"
@@ -55,6 +56,10 @@ Once the script is running, it will prompt you with "How may I assist you?" You 
   - "Launch Calculator"
   - "Launch Notepad"
   - "Launch Wordpad"
+  - "Launch Brave"
+
+- **Open a playlist**:
+  - "Play Code Vibes"
 
 The assistant will open the corresponding website or application or perform the search in your default web browser.
 
@@ -69,12 +74,21 @@ To extend the functionality and add more commands to open websites:
 
 ## Adding More Application Commands
 
-To extend the functionality and add more commands to open websites:
+To extend the functionality and add more commands to open applications:
 
 1. **Open the `assistant.py` file.**
 2. **Locate the `app_path` dictionary** within the `conditions` function.
 3. **Add a new entry** in the format `"app_name": "app_path"`.
 4. **Handle the new command** by adding logic within the `if command.startswith("launch"):` block.
+
+## Adding More Playlist Commands
+
+To extend the functionality and add more commands to open playlists:
+
+1. **Open the `assistant.py` file.**
+2. **Locate the `playlist_links` dictionary** within the `conditions` function.
+3. **Add a new entry** in the format `"playlist_name": "playlist_url"`.
+4. **Handle the new command** by adding logic within the `if command.startswith("play"):` block.
 
 
 ## Contributing
