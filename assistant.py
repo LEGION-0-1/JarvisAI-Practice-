@@ -16,9 +16,9 @@ def play_music(playlist_name, url):
     speak(f"Playing {playlist_name}")
     webbrowser.open(url)
 
-def open_app(app_name, path):
-    print(f"Opening {app_name}...")
-    speak(f"Opening {app_name}")
+def launch_app(app_name, path):
+    print(f"Launching {app_name}...")
+    speak(f"Launching {app_name}")
     subprocess.Popen(path)
 
 def search_google(query):
@@ -82,7 +82,7 @@ def conditions(command):
     elif command.startswith("launch"):
         for app, path in app_path.items():
             if app in command:
-                open_app(app.capitalize(), path)
+                launch_app(app.capitalize(), path)
                 return
         speak("Sorry, I don't recognize that app.")
         print("Sorry, I don't recognize that app.")
@@ -100,5 +100,6 @@ def conditions(command):
 
 while True:
     print("How may I assist you?")
+    speak("How may I assist you?")
     user_input = input()
     conditions(user_input)
