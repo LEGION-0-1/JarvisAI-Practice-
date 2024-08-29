@@ -11,6 +11,11 @@ def open_website(site_name, url):
     speak(f"Opening {site_name}")
     webbrowser.open(url)
 
+def play_music(playlist_name, url):
+    print(f"Playing {playlist_name}...")
+    speak(f"Playing {playlist_name}")
+    webbrowser.open(url)
+
 def open_app(app_name, path):
     print(f"Opening {app_name}...")
     speak(f"Opening {app_name}")
@@ -29,11 +34,17 @@ def conditions(command):
         "github": "https://github.com/",
         "chatgpt": "https://chatgpt.com/",
         "gpt": "https://chatgpt.com/",
+        "spotify": "https://open.spotify.com/",
+        "discord": "https://discord.com/app"
     }
     app_path = {
         "calculator": 'C:\\Windows\\System32\\calc.exe',
         "notepad": 'C:\\Windows\\System32\\notepad.exe',
-        "wordpad": 'C:\\Windows\\System32\\write.exe'
+        "wordpad": 'C:\\Windows\\System32\\write.exe',
+        "brave": 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\Brave.exe'
+    }
+    playlist_links = {
+        "code vibes": 'https://open.spotify.com/playlist/1B42ovHid4tydXN9j63DNL?si=cec94bd2a69547f4'
     }
     command = command.lower()
     
@@ -70,6 +81,13 @@ def conditions(command):
                 return
         speak("Sorry, I don't recognize that app.")
         print("Sorry, I don't recognize that app.")
+    elif command.startswith("play"):
+        for playlist, link in playlist_links.items():
+            if playlist in command:
+                play_music(playlist.capitalize(), link)
+                return
+        speak("Sorry, I don't recognize that site.")
+        print("Sorry, I don't recognize that site.")
 
     else:
         speak("Sorry, I didn't understand the command.")
@@ -79,3 +97,4 @@ while True:
     print("How may I assist you?")
     user_input = input()
     conditions(user_input)
+    
