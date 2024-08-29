@@ -57,6 +57,11 @@ Once the script is running, it will prompt you with "How may I assist you?" You 
   - "Launch Notepad"
   - "Launch Wordpad"
   - "Launch Brave"
+  - "Launch Unity"
+  - "Launch Excel"
+  - "Launch PPT"
+  - "Launch MS Word"
+  - "Launch VS Code"
 
 - **Open a playlist**:
   - "Play Code Vibes"
