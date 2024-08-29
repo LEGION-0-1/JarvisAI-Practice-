@@ -41,7 +41,12 @@ def conditions(command):
         "calculator": 'C:\\Windows\\System32\\calc.exe',
         "notepad": 'C:\\Windows\\System32\\notepad.exe',
         "wordpad": 'C:\\Windows\\System32\\write.exe',
-        "brave": 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\Brave.exe'
+        "brave": 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\Brave.exe',
+        "unity": 'C:\\Program Files\\Unity Hub\\Unity Hub.exe',
+        "excel": 'C:\\Program Files\\Microsoft Office\\Office15\\EXCEL.exe',
+        "ppt": 'C:\\Program Files\\Microsoft Office\\Office15\\POWERPNT.exe',
+        "ms word": 'C:\\Program Files\\Microsoft Office\\Office15\\WINWORD.exe',
+        "vs code": 'C:\\Program Files\\Microsoft VS Code\\Code.exe'
     }
     playlist_links = {
         "code vibes": 'https://open.spotify.com/playlist/1B42ovHid4tydXN9j63DNL?si=cec94bd2a69547f4'
@@ -97,4 +102,3 @@ while True:
     print("How may I assist you?")
     user_input = input()
     conditions(user_input)
-    
