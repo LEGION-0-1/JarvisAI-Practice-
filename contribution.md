@@ -58,7 +58,3 @@ Go to the original repository on GitHub and submit a pull request from your bran
 ## Reporting Issues
 
 If you encounter any bugs or issues while using the project, please open an issue on the [GitHub Issues](https://github.com/LEGION-0-1/Python-Assistant-Script/issues) page. Provide as much detail as possible, including steps to reproduce the issue.
-
-## License
-
-By contributing to this project, you agree that your contributions will be licensed under the MIT License.
