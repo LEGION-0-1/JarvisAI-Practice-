@@ -2,6 +2,8 @@ import win32com.client
 import webbrowser
 import subprocess
 import shutil
+import random
+import speech_recognition as sr
 
 def speak(text):
     speaker = win32com.client.Dispatch("SAPI.SpVoice")
@@ -12,24 +14,48 @@ def open_website(site_name, url):
     speak(f"Opening {site_name}")
     webbrowser.open(url)
 
-def play_music(platform, query=None, playlist_url=None):
-    if playlist_url:
-        print(f"Playing playlist {query} on {platform}...")
-        speak(f"Playing playlist {query} on {platform}")
-        webbrowser.open(playlist_url)
-    elif query:
-        if platform.lower() == "spotify":
-            search_url = f"https://open.spotify.com/search/{query.replace(' ', '%20')}"
-        elif platform.lower() == "youtube":
-            search_url = f"https://www.youtube.com/results?search_query={query.replace(' ', '+')}"
-        else:
-            speak(f"Sorry, I can't search for music on {platform}.")
-            print(f"Sorry, I can't search for music on {platform}.")
-            return
+def play_music(playlist_name, url):
+    print(f"Playing {playlist_name}...")
+    speak(f"Playing {playlist_name}")
+    webbrowser.open(url)
 
-        print(f"Searching for {query} on {platform}...")
-        speak(f"Searching for {query} on {platform}")
-        webbrowser.open(search_url)
+def choose_playlist(playlists):
+    speak("Which playlist would you like to listen to?")
+    print("Options:")
+    for i, playlist in enumerate(playlists, 1):
+        print(f"{i}. {playlist}")
+    
+    speak("Please select a number or type 'random' for a random choice.")
+    choice = input("Enter the number of the playlist or type 'random': ").strip().lower()
+    
+    if choice == "random":
+        selected_playlist = random.choice(list(playlists.items()))
+    elif choice.isdigit() and 1 <= int(choice) <= len(playlists):
+        selected_playlist = list(playlists.items())[int(choice) - 1]
+    else:
+        speak("Invalid selection. Please try again.")
+        print("Invalid selection. Please try again.")
+        return None
+    
+    return selected_playlist
+
+def play_author_playlist(author_playlists):
+    speak("Which author's playlist would you like to listen to?")
+    print("Options:")
+    for i, author in enumerate(author_playlists.keys(), 1):
+        print(f"{i}. {author}")
+    
+    speak("Please select a number.")
+    author_choice = input("Enter the number of the author: ").strip().lower()
+    
+    if author_choice.isdigit() and 1 <= int(author_choice) <= len(author_playlists):
+        selected_author = list(author_playlists.keys())[int(author_choice) - 1]
+        selected_playlist = choose_playlist(author_playlists[selected_author])
+        if selected_playlist:
+            play_music(*selected_playlist)
+    else:
+        speak("Invalid selection. Please try again.")
+        print("Invalid selection. Please try again.")
 
 def launch_app(app_name):
     app_path = shutil.which(app_name)
@@ -47,6 +73,24 @@ def search_google(query):
     speak(f"Searching Google for {query}")
     webbrowser.open(search_url)
 
+def get_voice_input():
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        speak("Listening...")
+        print("Listening...")
+        audio = recognizer.listen(source)
+    try:
+        command = recognizer.recognize_google(audio)
+        print(f"You said: {command}")
+        return command.lower()
+    except sr.UnknownValueError:
+        speak("Sorry, I did not understand that.")
+        print("Sorry, I did not understand that.")
+    except sr.RequestError:
+        speak("Sorry, I'm having trouble accessing the speech recognition service.")
+        print("Sorry, I'm having trouble accessing the speech recognition service.")
+    return ""
+
 def conditions(command):
     site_links = {
         "youtube": "https://www.youtube.com",
@@ -58,8 +102,18 @@ def conditions(command):
         "discord": "https://discord.com/app"
     }
     
-    playlist_links = {
-        "code vibes": 'https://open.spotify.com/playlist/1B42ovHid4tydXN9j63DNL?si=cec94bd2a69547f4'
+    author_playlists = {
+        "Legion": {
+            "Code Vibes": 'https://open.spotify.com/playlist/1B42ovHid4tydXN9j63DNL?si=cec94bd2a69547f4',
+        },
+        "Cypher": {
+            "Moonlit Melodies": 'https://open.spotify.com/playlist/6thefFdcUAFMq3OauiYrI5?si=49fbd68b9cc34a4f',
+            "Therapy Session": 'https://open.spotify.com/playlist/1QEYpbmhQmpc5oyuOmrNyM?si=45586524a02f4662',
+            "The what if's": 'https://open.spotify.com/playlist/5XZpcWbwdY4F3uE5Tnw7JL?si=a42e0c84dae040f0',
+            "Chillin in the Car": 'https://open.spotify.com/playlist/796158DQgVqtmzpW7HJhPL?si=e170db32357046be',
+            "Chillin in the Car II": 'https://open.spotify.com/playlist/0h9zoxsjsxBSXorkj1sBLI?si=c4f5f9c4c1774284',
+            "New Beginnings": 'https://open.spotify.com/playlist/2W8ayBPPRFOqZsZ6CEFnNU?si=ef1f7b8122c24302',
+        }
     }
 
     command = command.lower()
@@ -96,25 +150,28 @@ def conditions(command):
         launch_app(app_name)
     
     elif command.startswith("play"):
-        if "on spotify" in command:
-            query = command.replace("play", "").replace("on spotify", "").strip()
-            if query in playlist_links:
-                play_music("Spotify", query, playlist_links[query])
-            else:
-                play_music("Spotify", query)
-        elif "on youtube" in command:
-            query = command.replace("play", "").replace("on youtube", "").strip()
-            play_music("YouTube", query)
-        else:
-            speak("Please specify a platform, like Spotify or YouTube.")
-            print("Please specify a platform, like Spotify or YouTube.")
+        play_author_playlist(author_playlists)
     
     else:
         speak("Sorry, I didn't understand the command.")
         print("Sorry, I didn't understand the command.")
 
-while True:
-    print("How may I assist you?")
-    speak("How may I assist you?")
-    user_input = input()
-    conditions(user_input)
+def main():
+    while True:
+        speak("Would you like to use voice input or text input?")
+        input_method = input("Type 'voice' for voice input or 'text' for text input: ").strip().lower()
+        
+        if input_method == "voice":
+            user_input = get_voice_input()
+        elif input_method == "text":
+            user_input = input("How may I assist you? ")
+        else:
+            speak("Invalid choice. Please try again.")
+            print("Invalid choice. Please try again.")
+            continue
+
+        if user_input:
+            conditions(user_input)
+
+if __name__ == "__main__":
+    main()
