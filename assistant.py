@@ -1,7 +1,6 @@
 import win32com.client
 import webbrowser
 import subprocess
-import shutil
 import random
 import speech_recognition as sr
 
@@ -54,18 +53,13 @@ def play_author_playlist(author_playlists):
         if selected_playlist:
             play_music(*selected_playlist)
     else:
-        speak("Invalid selection. Please try again.")
         print("Invalid selection. Please try again.")
+        speak("Invalid selection. Please try again.")
 
-def launch_app(app_name):
-    app_path = shutil.which(app_name)
-    if app_path:
+def launch_app(app_name, path):
         print(f"Launching {app_name}...")
         speak(f"Launching {app_name}")
-        subprocess.Popen(app_path)
-    else:
-        speak(f"Could not find {app_name} on your system.")
-        print(f"Could not find {app_name} on your system.")
+        subprocess.Popen(path)
 
 def search_google(query):
     search_url = f"https://www.google.com/search?q={query}"
@@ -76,19 +70,19 @@ def search_google(query):
 def get_voice_input():
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
-        speak("Listening...")
         print("Listening...")
+        speak("Listening...")
         audio = recognizer.listen(source)
     try:
         command = recognizer.recognize_google(audio)
         print(f"You said: {command}")
         return command.lower()
     except sr.UnknownValueError:
-        speak("Sorry, I did not understand that.")
         print("Sorry, I did not understand that.")
+        speak("Sorry, I did not understand that.")
     except sr.RequestError:
-        speak("Sorry, I'm having trouble accessing the speech recognition service.")
         print("Sorry, I'm having trouble accessing the speech recognition service.")
+        speak("Sorry, I'm having trouble accessing the speech recognition service.")
     return ""
 
 def conditions(command):
@@ -115,6 +109,17 @@ def conditions(command):
             "New Beginnings": 'https://open.spotify.com/playlist/2W8ayBPPRFOqZsZ6CEFnNU?si=ef1f7b8122c24302',
         }
     }
+    app_path = {
+        "calculator": 'C:\\Windows\\System32\\calc.exe',
+        "notepad": 'C:\\Windows\\System32\\notepad.exe',
+        "wordpad": 'C:\\Windows\\System32\\write.exe',
+        "brave": 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\Brave.exe',
+        "unity": 'C:\\Program Files\\Unity Hub\\Unity Hub.exe',
+        "excel": 'C:\\Program Files\\Microsoft Office\\Office15\\EXCEL.exe',
+        "ppt": 'C:\\Program Files\\Microsoft Office\\Office15\\POWERPNT.exe',
+        "ms word": 'C:\\Program Files\\Microsoft Office\\Office15\\WINWORD.exe',
+        "vs code": 'C:\\Program Files\\Microsoft VS Code\\Code.exe'
+    }
 
     command = command.lower()
 
@@ -123,8 +128,8 @@ def conditions(command):
             if site in command:
                 open_website(site.capitalize(), link)
                 return
-        speak("Sorry, I don't recognize that site.")
         print("Sorry, I don't recognize that site.")
+        speak("Sorry, I don't recognize that site.")
     
     elif "search" in command:
         search_platform = "google"
@@ -146,8 +151,12 @@ def conditions(command):
         webbrowser.open(search_url)
     
     elif command.startswith("launch"):
-        app_name = command.replace("launch", "").strip()
-        launch_app(app_name)
+        for app, path in app_path.items():
+            if app in command:
+                launch_app(app.capitalize(), path)
+                return
+        speak("Sorry, I don't recognize that app.")
+        print("Sorry, I don't recognize that app.")
     
     elif command.startswith("play"):
         play_author_playlist(author_playlists)
@@ -162,7 +171,7 @@ def main():
         if input_method == "voice":
             user_input = get_voice_input()
         elif input_method == "text":
-            user_input = input("How may I assist you? ")
+            user_input = input("How may I assist you?\n")
         else:
             speak("Invalid choice. Please try again.")
             print("Invalid choice. Please try again.")
@@ -172,6 +181,6 @@ def main():
             conditions(user_input)
 
 if __name__ == "__main__":
-    speak("Would you like to use voice input or text input?")
     input_method = input("Type 'voice' for voice input or 'text' for text input: ").strip().lower()
+    speak("Would you like to use voice input or text input?")
     main()
