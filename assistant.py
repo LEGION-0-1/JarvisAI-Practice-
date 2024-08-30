@@ -158,8 +158,6 @@ def conditions(command):
 
 def main():
     while True:
-        speak("Would you like to use voice input or text input?")
-        input_method = input("Type 'voice' for voice input or 'text' for text input: ").strip().lower()
         
         if input_method == "voice":
             user_input = get_voice_input()
@@ -174,4 +172,6 @@ def main():
             conditions(user_input)
 
 if __name__ == "__main__":
+    speak("Would you like to use voice input or text input?")
+    input_method = input("Type 'voice' for voice input or 'text' for text input: ").strip().lower()
     main()
