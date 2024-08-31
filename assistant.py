@@ -3,6 +3,16 @@ import webbrowser
 import subprocess
 import random
 import speech_recognition as sr
+import time
+
+def set_reminder(message, delay_seconds):
+    minutes, seconds = divmod(delay_seconds, 60)
+    delay_message = f"{minutes} minute(s) and {seconds} seconds" if minutes else f"{seconds} seconds"
+    
+    speak(f"Reminder set for {delay_message}.")
+    time.sleep(delay_seconds)
+    print(f"Reminder: {message}")
+    speak(f"Reminder: {message}")
 
 def speak(text):
     speaker = win32com.client.Dispatch("SAPI.SpVoice")
@@ -164,6 +174,26 @@ def conditions(command):
     elif command.startswith("play"):
         play_author_playlist(author_playlists)
     
+    if "remind me to " in command:
+        try:
+            parts = command.split(" in ")
+            message = parts[0].replace("remind me to ", "").strip()
+
+            delay_str = parts[1].strip().lower()
+            if "minute" in delay_str:
+                delay_value = int(delay_str.split(" ")[0])
+                delay_seconds = delay_value * 60
+            elif "second" in delay_str:
+                delay_value = int(delay_str.split(" ")[0])
+                delay_seconds = delay_value
+            else:
+                raise ValueError("Invalid time unit")
+
+            set_reminder(message, delay_seconds)
+        except (ValueError, IndexError) as e:
+            speak(f"Sorry, I couldn't understand the delay time. Please specify time in seconds or minutes.")
+        return
+
     else:
         speak("Sorry, I didn't understand the command.")
         print("Sorry, I didn't understand the command.")

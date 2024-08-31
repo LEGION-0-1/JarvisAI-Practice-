@@ -68,6 +68,11 @@ Once the script is running, it will prompt you with "How may I assist you?" You 
   - "Launch MS Word"
   - "Launch VS Code"
 
+- **Set reminders**:
+  - "Remind me to <task> in <time>" can be used to set a reminder for a particular task
+  - Such as
+    - "Remind me to walk the dog in 10 minutes"
+
 - **Play Music**:
   - The assistant supports multiple authors' playlists. 
   - It will prompt you to choose an author, and then you can select a specific playlist or allow the assistant to choose one at random.
