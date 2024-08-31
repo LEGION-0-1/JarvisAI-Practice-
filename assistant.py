@@ -113,6 +113,7 @@ def conditions(command):
         "calculator": 'C:\\Windows\\System32\\calc.exe',
         "notepad": 'C:\\Windows\\System32\\notepad.exe',
         "wordpad": 'C:\\Windows\\System32\\write.exe',
+        "cmd": 'C:\\Windows\\System32\\cmd.exe',
         "brave": 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\Brave.exe',
         "unity": 'C:\\Program Files\\Unity Hub\\Unity Hub.exe',
         "excel": 'C:\\Program Files\\Microsoft Office\\Office15\\EXCEL.exe',
@@ -139,10 +140,12 @@ def conditions(command):
             search_platform = "youtube"
             query = query.replace("on youtube", "").strip()
             search_url = f"https://www.youtube.com/results?search_query={query}"
+        
         elif "on github" in command:
             search_platform = "github"
             query = query.replace("on github", "").strip()
             search_url = f"https://github.com/search?q={query}"
+        
         else:
             search_url = f"https://www.google.com/search?q={query}"
 
@@ -181,6 +184,6 @@ def main():
             conditions(user_input)
 
 if __name__ == "__main__":
-    input_method = input("Type 'voice' for voice input or 'text' for text input: ").strip().lower()
     speak("Would you like to use voice input or text input?")
+    input_method = input("Type 'voice' for voice input or 'text' for text input: ").strip().lower()
     main()
