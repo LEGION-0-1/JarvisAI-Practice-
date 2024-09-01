@@ -13,8 +13,8 @@ Click on the "Fork" button at the top right of the repository page to create a p
 Clone the forked repository to your local machine:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/Python-Assistant-Script.git
-cd Python-Assistant-Script
+git clone https://github.com/YOUR-USERNAME/python-assistant-script.git
+cd python-assistant-script
 ```
 
 ### 3. Create a New Branch
@@ -57,4 +57,4 @@ Go to the original repository on GitHub and submit a pull request from your bran
 
 ## Reporting Issues
 
-If you encounter any bugs or issues while using the project, please open an issue on the [GitHub Issues](https://github.com/LEGION-0-1/Python-Assistant-Script/issues) page. Provide as much detail as possible, including steps to reproduce the issue.
+If you encounter any bugs or issues while using the project, please open an issue on the [GitHub Issues](https://github.com/LEGION-0-1/python-assistant-script/issues) page. Provide as much detail as possible, including steps to reproduce the issue.

@@ -26,8 +26,8 @@ The script supports both voice and text input, making it versatile and user-frie
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/LEGION-0-1/Python-Assistant-Script.git
-   cd Python-Assistant-Script
+   git clone https://github.com/LEGION-0-1/python-assistant-script.git
+   cd python-assistant-script
    ```
 
 2. **Install Dependencies**
@@ -131,4 +131,4 @@ We welcome contributions! Please check the `CONTRIBUTION.md` file for guidelines
 
 ## Issues and Feedback
 
-If you encounter any bugs or have any suggestions for improvements, please open an issue on the [GitHub Issues](https://github.com/LEGION-0-1/Python-Assistant-Script/issues) page.
+If you encounter any bugs or have any suggestions for improvements, please open an issue on the [GitHub Issues](https://github.com/LEGION-0-1/python-assistant-script/issues) page.
