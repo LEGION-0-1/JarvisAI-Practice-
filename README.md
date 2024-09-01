@@ -136,3 +136,8 @@ We welcome contributions! Please check the `CONTRIBUTION.md` file for guidelines
 ## Issues and Feedback
 
 If you encounter any bugs or have any suggestions for improvements, please open an issue on the [GitHub Issues](https://github.com/LEGION-0-1/python-assistant-script/issues) page.
+
+## License
+```bash
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+```
