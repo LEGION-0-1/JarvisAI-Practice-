@@ -1,4 +1,3 @@
 pywin32==306
 SpeechRecognition==3.8.1
 PyAudio==0.2.14
-setuptools (Need to be installed by Python 3.12 users only)
