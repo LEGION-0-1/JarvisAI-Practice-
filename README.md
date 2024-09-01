@@ -34,8 +34,12 @@ The script supports both voice and text input, making it versatile and user-frie
    ```bash
    pip install -r requirements.txt
    ```
+   **For Python 3.12 users only**
+   ```bash
+   pip install setuptools
+   ```
 
-3. **Run the Script**
+4. **Run the Script**
    ```bash
    python assistant.py
    ```
