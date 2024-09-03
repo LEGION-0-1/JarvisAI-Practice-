@@ -131,7 +131,7 @@ To add more playlists:
 
 ## Contributing
 
-We welcome contributions! Please check the `CONTRIBUTION.md` file for guidelines on how to contribute to this project.
+We welcome contributions! Please check the `CONTRIBUTING.md` file for guidelines on how to contribute to this project.
 
 ## Issues and Feedback
 
